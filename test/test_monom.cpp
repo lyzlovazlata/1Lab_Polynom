@@ -1,7 +1,7 @@
-#include <gtest/gtest.h>
+#include <gtest.h>
 #include "Monom.h"
-
-TEST(MonomTest, ZeroCheck) {
-    Monom m;   // если у тебя по умолчанию 0
+#include "string"
+TEST(MonomT, ZeroCheck) {
+    Monom m;
     EXPECT_TRUE(m.isZero());
 }

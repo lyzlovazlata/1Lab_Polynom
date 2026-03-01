@@ -1,7 +1,7 @@
-#include <gtest/gtest.h>
+#include <gtest.h>
 #include "Polynom.h"
 
-TEST(PolynomTest, EmptyCheck) {
+TEST(Polynom, EmptyCheck) {
     Polynom p;
     EXPECT_TRUE(p.empty());
 }
