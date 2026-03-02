@@ -1,4 +1,4 @@
-#include <gtest.h>
+#include <gtest/gtest.h>
 #include "Polynom.h"
 
 TEST(Polynom, EmptyCheck) {

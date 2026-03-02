@@ -1,8 +1,14 @@
+# samples/CMakeLists.txt
+# simple example target that uses the library
+
 set(target sample)
 
-file(GLOB hdrs "*.h")
-file(GLOB srcs "*.cpp")
+file(GLOB SAMPLE_SRCS "*.cpp")
 
-add_executable(${target} ${srcs} ${hdrs} )
+add_executable(${target} ${SAMPLE_SRCS})
 
-target_link_libraries(${target} ${LIBRARY})
+# samples нужно видеть заголовки библиотеки
+target_include_directories(${target} PRIVATE ${INCLUDE})
+
+# линкуем с нашей библиотекой
+target_link_libraries(${target} PRIVATE ${LIBRARY})

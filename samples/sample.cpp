@@ -1,4 +1,4 @@
-#include "Expression.h"
+#include "Polynom.h"
 #include <string>
 #include<iostream>
 #include<locale.h>
