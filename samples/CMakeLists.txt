@@ -1,14 +1,16 @@
 # samples/CMakeLists.txt
-# simple example target that uses the library
-
 set(target sample)
 
-file(GLOB SAMPLE_SRCS "*.cpp")
+file(GLOB SAMPLE_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
 add_executable(${target} ${SAMPLE_SRCS})
 
-# samples нужно видеть заголовки библиотеки
+# samples должно видеть заголовки библиотеки
+# Родительский CMake выставил переменную INCLUDE
 target_include_directories(${target} PRIVATE ${INCLUDE})
 
-# линкуем с нашей библиотекой
+# Линкуем с нашей библиотекой и (опционально) с parser_generated если есть
 target_link_libraries(${target} PRIVATE ${LIBRARY})
+if (TARGET parser_generated)
+  target_link_libraries(${target} PRIVATE parser_generated)
+endif()

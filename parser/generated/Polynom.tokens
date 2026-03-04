@@ -1,0 +1,16 @@
+PLUS=1
+MINUS=2
+MUL=3
+POW=4
+LPAREN=5
+RPAREN=6
+NUMBER=7
+INT=8
+VAR=9
+WS=10
+'+'=1
+'-'=2
+'*'=3
+'^'=4
+'('=5
+')'=6

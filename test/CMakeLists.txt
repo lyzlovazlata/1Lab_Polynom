@@ -2,18 +2,17 @@
 
 set(target ${TESTS})
 
-# берем все тестовые cpp (поддерживает test_main.cpp, test_monom.cpp, test_polynom.cpp)
-file(GLOB TEST_SRCS "*.cpp")
+file(GLOB TEST_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
 add_executable(${target} ${TEST_SRCS})
 
-# тесты должны видеть заголовки библиотеки
 target_include_directories(${target} PRIVATE ${INCLUDE})
 
-# У тебя есть test_main.cpp со своим main -> линкуем GTest::gtest (а не GTest::gtest_main)
-# Если у тебя НЕТ собственного main, то линкуй GTest::gtest_main вместо GTest::gtest.
+# Линковка с GTest (FetchContent был выполнен в корневом CMake)
+# Если у тебя в тестах свой main (test_main.cpp) - линкуем GTest::gtest, иначе GTest::gtest_main
+# Предположим, что test_main.cpp есть => используем GTest::gtest
 target_link_libraries(${target} PRIVATE GTest::gtest ${LIBRARY})
 
-# Регистрируем тест в ctest (запуск через ctest)
+# Добавляем тест для ctest
 enable_testing()
 add_test(NAME ${target} COMMAND ${target})

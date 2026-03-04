@@ -87,24 +87,47 @@ public:
 
     //outing
     // it looks like coef*x^i y^j z^k (skip 0, ^1 )
-    friend std::ostream& operator<<(std::ostream& os, const Monom& m) {
-        // if 1 dont print coef
-        if (std::fabs(m.coef)-1.0 < E) { os << m.coef << "*"; }
-        int i = m.getI(), j = m.getJ(), k = m.getK();
-        if (i != 0) {
-            os << "x";
-            if (i != 1) os << "^" << i;
-        }
-        if (j != 0) {
-            os << " y";
-            if (j != 1) os << "^" << j;
-        }
-        if (k != 0) {
-            os << " z";
-            if (k != 1) os << "^" << k;
-        }
+friend std::ostream& operator<<(std::ostream& os, const Monom& m) {
+    if (m.isZero()) {
+        os << "0";
         return os;
     }
+
+    int i = m.getI();
+    int j = m.getJ();
+    int k = m.getK();
+
+    bool hasVars = (i != 0 || j != 0 || k != 0);
+
+    double c = m.coef;
+
+    if (!hasVars) {
+        os << c;
+        return os;
+    }
+    if (std::fabs(c - 1.0) < E) {}
+    else if (std::fabs(c + 1.0) < E) {
+        os << "-";
+    }
+    else {
+        os << c;
+    }
+
+    if (i != 0) {
+        os << "x";
+        if (i != 1) os << "^" << i;
+    }
+    if (j != 0) {
+        os << "y";
+        if (j != 1) os << "^" << j;
+    }
+    if (k != 0) {
+        os << "z";
+        if (k != 1) os << "^" << k;
+    }
+
+    return os;
+}
 
     // easy in - coef i j k
     friend std::istream& operator>>(std::istream& is, Monom& m) {
